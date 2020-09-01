@@ -8,8 +8,6 @@ const devMode = process.argv.indexOf("--mode=production") === -1;
 // const happyPack = require("happypack");
 // const os = require("os");
 // const CopyWebpackPlugin = require("copy-webpack-plugin");
-const BundelAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin;
 
 const firstPlugin = require(path.resolve(
   __dirname,
@@ -50,9 +48,18 @@ module.exports = {
       },
       {
         test: /\.js$/,
+        exclude:[
+            /node_modules/,
+            path.resolve(__dirname,'../static/**')
+        ],
+        include:path.resolve(__dirname,'../src'),
         use: [
           {
             loader: path.resolve(__dirname, "../drop-console.js"),
+            options:{
+                name:'John',
+                age:12
+            }
           },
         ],
       },
@@ -138,16 +145,13 @@ module.exports = {
   },
   plugins: [
     new firstPlugin(),
-    new BundelAnalyzerPlugin({
-      analyzerHost: "127.0.0.1",
-      analyzerPort: 8080,
-    }),
+
     new webpack.DllReferencePlugin({
-      context: __dirname,
+      //   context: __dirname,
       manifest: require("../static/js/vendor-manifest.json"),
     }),
     new webpack.DllReferencePlugin({
-      context: __dirname,
+      //   context: __dirname,
       manifest: path.resolve(__dirname, "../static/js/core-manifest.json"),
     }),
     new webpack.HotModuleReplacementPlugin(),
