@@ -1,5 +1,5 @@
-const webpack = require('wepback')
 const path = require('path')
+const webpack = require("webpack");
 const webpackConfig = require(path.resolve(__dirname,'./webpack.config.js'))
 const webpackMerge = require('webpack-merge')
 module.exports = webpackMerge(webpackConfig,{

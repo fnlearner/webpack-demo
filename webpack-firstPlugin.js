@@ -5,6 +5,7 @@ class firstPlugin{
     }
     apply(compiler){
       compiler.plugin('emit',(compilation,callback)=>{
+        console.log('i am first plugin')
         let str = ''
         for (let filename in compilation.assets){
           str += `文件:${filename}  大小${compilation.assets[filename]['size']()}\n`

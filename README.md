@@ -1,5 +1,5 @@
 # webpack-demo
-it is a webpack demo 
+webpack demo including the config of dll ,dev env and prod env.And sepreating common module into single pkg 
 
 执行打包命令
 ```
